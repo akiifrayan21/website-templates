@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Ember & Spice — modern restaurant website template." />
+  <title>Ember & Spice | Modern Restaurant</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Playfair Display', 'serif']
+          },
+          colors: {
+            ember: '#ff5a36',
+            saffron: '#f6b73c',
+            ink: '#171717',
+            cream: '#fff8ef'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    body { background: #fffaf4; }
+
+    .glass {
+      background: rgba(20,20,20,.52);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .hero-overlay {
+      background:
+        radial-gradient(circle at 75% 35%, rgba(246,183,60,.22), transparent 32%),
+        linear-gradient(90deg, rgba(10,10,10,.92) 0%, rgba(10,10,10,.65) 45%, rgba(10,10,10,.24) 100%);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .75s ease, transform .75s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-card img,
+    .gallery-card img {
+      transition: transform .6s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .menu-card:hover img,
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .nav-link::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      margin-top: 3px;
+      background: #f6b73c;
+      transition: width .25s ease;
+    }
+
+    .nav-link:hover::after { width: 100%; }
+
+    ::selection {
+      background: #ff5a36;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-ink overflow-x-hidden">
+
+  <!-- ================= HEADER ================= -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-5 sm:px-8 py-4 flex items-center justify-between">
+      <a href="#home" class="text-white font-display text-2xl sm:text-3xl font-bold tracking-tight">
+        Ember<span class="text-saffron">&</span>Spice
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-white text-sm font-semibold">
+        <a class="nav-link" href="#about">About</a>
+        <a class="nav-link" href="#menu">Menu</a>
+        <a class="nav-link" href="#gallery">Gallery</a>
+        <a class="nav-link" href="#contact">Contact</a>
+        <a href="#contact" class="bg-ember hover:bg-orange-600 px-5 py-3 rounded-full transition shadow-lg shadow-orange-950/20">
+          Book a Table
+        </a>
+      </div>
+
+      <button id="menuBtn" class="md:hidden text-white text-3xl leading-none" aria-label="Open menu">
+        ☰
+      </button>
+    </nav>
+
+    <div id="mobileMenu" class="hidden md:hidden mx-4 rounded-2xl glass px-6 py-5 text-white">
+      <div class="flex flex-col gap-4 font-semibold">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#menu" class="mobile-link">Menu</a>
+        <a href="#gallery" class="mobile-link">Gallery</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+    <img
+      src="https://images.unsplash.com/photo-1515003197210-e0cd71810b5f?auto=format&fit=crop&w=2000&q=85"
+      alt="Restaurant dishes"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-24 pb-16">
+      <div class="max-w-3xl">
+        <div class="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white rounded-full px-4 py-2 text-sm mb-6 backdrop-blur">
+          <span class="w-2 h-2 rounded-full bg-saffron animate-pulse"></span>
+          Fresh ingredients. Bold flavours. Every day.
+        </div>
+
+        <h1 class="font-display text-white text-5xl sm:text-6xl lg:text-8xl font-extrabold leading-[0.96] tracking-tight">
+          Food made to <span class="text-saffron italic">remember.</span>
+        </h1>
+
+        <p class="text-white/80 text-lg sm:text-xl mt-7 max-w-xl leading-relaxed">
+          A modern dining experience where vibrant ingredients, open-fire cooking and good company come together.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-9">
+          <a href="#menu" class="bg-ember hover:bg-orange-600 text-white px-7 py-4 rounded-full font-bold text-center transition hover:-translate-y-1 shadow-xl shadow-black/20">
+            Explore Our Menu
+          </a>
+          <a href="#contact" class="border border-white/40 bg-white/10 hover:bg-white hover:text-black text-white px-7 py-4 rounded-full font-bold text-center transition hover:-translate-y-1 backdrop-blur">
+            Reserve a Table
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-8 mt-12 text-white">
+          <div>
+            <p class="text-3xl font-display font-bold">4.9★</p>
+            <p class="text-white/60 text-sm">Guest rating</p>
+          </div>
+          <div>
+            <p class="text-3xl font-display font-bold">25+</p>
+            <p class="text-white/60 text-sm">Signature dishes</p>
+          </div>
+          <div>
+            <p class="text-3xl font-display font-bold">7 Days</p>
+            <p class="text-white/60 text-sm">Open weekly</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a href="#about" class="absolute bottom-7 left-1/2 -translate-x-1/2 z-10 text-white/70 text-sm animate-bounce">
+      ↓ Scroll
+    </a>
+  </section>
+
+  <!-- ================= ABOUT / HIGHLIGHTS ================= -->
+  <section id="about" class="py-20 sm:py-28 bg-cream">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+        <div class="reveal relative">
+          <div class="rounded-[2rem] overflow-hidden shadow-2xl">
+            <img
+              src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1200&q=85"
+              alt="Chef plating food"
+              class="w-full h-[520px] object-cover"
+            />
+          </div>
+
+          <div class="absolute -bottom-6 -right-2 sm:right-7 bg-ink text-white rounded-3xl p-5 sm:p-7 shadow-xl max-w-[230px]">
+            <p class="text-saffron text-4xl font-display font-bold">12+</p>
+            <p class="text-sm text-white/70 mt-1">Years of creating memorable dining experiences.</p>
+          </div>
+        </div>
+
+        <div class="reveal">
+          <p class="text-ember uppercase tracking-[.25em] font-bold text-sm mb-3">Our Story</p>
+          <h2 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-tight">
+            Honest food with a little <span class="text-ember italic">fire.</span>
+          </h2>
+          <p class="text-neutral-600 text-lg leading-relaxed mt-6">
+            We believe the best meals are uncomplicated: quality produce, bold seasoning and thoughtful technique. Our kitchen mixes familiar comfort with exciting global influences.
+          </p>
+
+          <div class="grid sm:grid-cols-3 gap-5 mt-9">
+            <div class="bg-white p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-3xl">🌿</span>
+              <h3 class="font-bold mt-3">Fresh Daily</h3>
+              <p class="text-sm text-neutral-500 mt-1">Locally sourced ingredients whenever possible.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-3xl">🔥</span>
+              <h3 class="font-bold mt-3">Bold Flavour</h3>
+              <p class="text-sm text-neutral-500 mt-1">Fire, spice and balance in every plate.</p>
+            </div>
+            <div class="bg-white p-5 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-3xl">🤝</span>
+              <h3 class="font-bold mt-3">Good Vibes</h3>
+              <p class="text-sm text-neutral-500 mt-1">Warm hospitality from lunch to late night.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= MENU ================= -->
+  <section id="menu" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
+        <div>
+          <p class="text-ember uppercase tracking-[.25em] font-bold text-sm mb-3">Popular Picks</p>
+          <h2 class="font-display text-4xl sm:text-6xl font-bold">Made for cravings.</h2>
+        </div>
+        <p class="text-neutral-500 max-w-md">
+          A few guest favourites from our kitchen. Swap these demo items with your restaurant’s real menu.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-7">
+        <!-- Card 1 -->
+        <article class="menu-card reveal bg-cream rounded-[2rem] overflow-hidden group shadow-sm hover:shadow-xl transition">
+          <div class="overflow-hidden h-72">
+            <img
+              src="https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=900&q=80"
+              alt="Spicy noodles"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold">Firecracker Noodles</h3>
+                <p class="text-neutral-500 text-sm mt-2">Wok-tossed noodles, chilli oil, sesame, spring onion and roasted vegetables.</p>
+              </div>
+              <span class="font-bold text-ember text-lg">₹349</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="menu-card reveal bg-cream rounded-[2rem] overflow-hidden group shadow-sm hover:shadow-xl transition">
+          <div class="overflow-hidden h-72">
+            <img
+              src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=900&q=80"
+              alt="Gourmet burger"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold">Smoky House Burger</h3>
+                <p class="text-neutral-500 text-sm mt-2">Charred patty, caramelised onion, crisp lettuce, cheese and house sauce.</p>
+              </div>
+              <span class="font-bold text-ember text-lg">₹429</span>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="menu-card reveal bg-cream rounded-[2rem] overflow-hidden group shadow-sm hover:shadow-xl transition">
+          <div class="overflow-hidden h-72">
+            <img
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=900&q=80"
+              alt="Fresh salad bowl"
+              class="w-full h-full object-cover"
+            />
+          </div>
+          <div class="p-6">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-display text-2xl font-bold">Garden Crunch Bowl</h3>
+                <p class="text-neutral-500 text-sm mt-2">Greens, avocado, seasonal vegetables, seeds and citrus dressing.</p>
+              </div>
+              <span class="font-bold text-ember text-lg">₹319</span>
+            </div>
+          </div>
+        </article>
+      </div>
+
+      <div class="reveal text-center mt-10">
+        <button onclick="showToast()" class="inline-flex items-center gap-2 border-2 border-ink hover:bg-ink hover:text-white px-7 py-3.5 rounded-full font-bold transition">
+          View Full Menu <span>↗</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="py-20 sm:py-28 bg-ink text-white">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+      <div class="reveal text-center max-w-2xl mx-auto mb-12">
+        <p class="text-saffron uppercase tracking-[.25em] font-bold text-sm mb-3">Inside Ember & Spice</p>
+        <h2 class="font-display text-4xl sm:text-6xl font-bold">Eat. Sip. Stay awhile.</h2>
+      </div>
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+        <div class="gallery-card reveal overflow-hidden rounded-3xl row-span-2 h-[440px] sm:h-[560px]">
+          <img
+            src="https://images.unsplash.com/photo-1552566626-52f8b828add9?auto=format&fit=crop&w=900&q=80"
+            alt="Restaurant interior"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[210px] sm:h-[268px]">
+          <img
+            src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=900&q=80"
+            alt="Pizza"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[210px] sm:h-[268px]">
+          <img
+            src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?auto=format&fit=crop&w=900&q=80"
+            alt="Restaurant table"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="gallery-card reveal overflow-hidden rounded-3xl row-span-2 h-[440px] sm:h-[560px]">
+          <img
+            src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=900&q=80"
+            alt="Shared dishes"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[210px] sm:h-[268px]">
+          <img
+            src="https://images.unsplash.com/photo-1550966871-3ed3cdb5ed0c?auto=format&fit=crop&w=900&q=80"
+            alt="Dining area"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[210px] sm:h-[268px]">
+          <img
+            src="https://images.unsplash.com/photo-1473093295043-cdd812d0e601?auto=format&fit=crop&w=900&q=80"
+            alt="Pasta dish"
+            class="w-full h-full object-cover"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= CONTACT + FOOTER ================= -->
+  <section id="contact" class="bg-saffron">
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-20 sm:py-24">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="reveal">
+          <p class="uppercase tracking-[.25em] font-bold text-sm mb-3">Come Hungry</p>
+          <h2 class="font-display text-5xl sm:text-7xl font-bold leading-[1]">
+            Your table is waiting.
+          </h2>
+          <p class="text-black/65 text-lg mt-6 max-w-lg">
+            Drop in for a quick bite or stay for the whole evening. For groups and special occasions, send us a message.
+          </p>
+        </div>
+
+        <div class="reveal bg-white rounded-[2rem] p-7 sm:p-9 shadow-xl">
+          <div class="grid sm:grid-cols-2 gap-6">
+            <div>
+              <p class="text-neutral-400 text-xs uppercase tracking-widest font-bold">Location</p>
+              <p class="font-semibold mt-2">12 Market Street<br>Your City, India</p>
+            </div>
+            <div>
+              <p class="text-neutral-400 text-xs uppercase tracking-widest font-bold">Hours</p>
+              <p class="font-semibold mt-2">Mon–Sun<br>12 PM – 11 PM</p>
+            </div>
+            <div>
+              <p class="text-neutral-400 text-xs uppercase tracking-widest font-bold">Phone</p>
+              <a href="tel:+919876543210" class="font-semibold mt-2 inline-block hover:text-ember transition">+91 98765 43210</a>
+            </div>
+            <div>
+              <p class="text-neutral-400 text-xs uppercase tracking-widest font-bold">Email</p>
+              <a href="mailto:hello@emberandspice.com" class="font-semibold mt-2 inline-block hover:text-ember transition">hello@emberandspice.com</a>
+            </div>
+          </div>
+
+          <form id="contactForm" class="mt-8 space-y-4">
+            <div class="grid sm:grid-cols-2 gap-4">
+              <input required type="text" placeholder="Your name" class="w-full bg-neutral-100 px-4 py-3.5 rounded-xl outline-none focus:ring-2 focus:ring-ember" />
+              <input required type="email" placeholder="Email address" class="w-full bg-neutral-100 px-4 py-3.5 rounded-xl outline-none focus:ring-2 focus:ring-ember" />
+            </div>
+            <textarea required rows="4" placeholder="Message or reservation request" class="w-full bg-neutral-100 px-4 py-3.5 rounded-xl outline-none focus:ring-2 focus:ring-ember resize-none"></textarea>
+            <button type="submit" class="w-full bg-ink hover:bg-ember text-white font-bold py-4 rounded-xl transition">
+              Send Request
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <footer class="border-t border-black/10">
+      <div class="max-w-7xl mx-auto px-5 sm:px-8 py-7 flex flex-col sm:flex-row gap-4 items-center justify-between text-sm">
+        <p>© <span id="year"></span> Ember & Spice. All rights reserved.</p>
+        <div class="flex gap-5 font-semibold">
+          <a href="#" class="hover:opacity-60 transition">Instagram</a>
+          <a href="#" class="hover:opacity-60 transition">Facebook</a>
+          <a href="#" class="hover:opacity-60 transition">Maps</a>
+        </div>
+      </div>
+    </footer>
+  </section>
+
+  <!-- Toast -->
+  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-black text-white px-5 py-3 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-[100]">
+    Demo action — connect this button to your full menu page.
+  </div>
+
+  <script>
+    // Mobile navigation
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    menuBtn.addEventListener('click', () => {
+      mobileMenu.classList.toggle('hidden');
+      menuBtn.textContent = mobileMenu.classList.contains('hidden') ? '☰' : '×';
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        menuBtn.textContent = '☰';
+      });
+    });
+
+    // Header background on scroll
+    const header = document.getElementById('header');
+
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        header.classList.add('bg-black/90', 'backdrop-blur-xl', 'shadow-lg');
+      } else {
+        header.classList.remove('bg-black/90', 'backdrop-blur-xl', 'shadow-lg');
+      }
+    });
+
+    // Reveal-on-scroll animation
+    const revealItems = document.querySelectorAll('.reveal');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealItems.forEach(item => observer.observe(item));
+
+    // Demo contact form interaction
+    const contactForm = document.getElementById('contactForm');
+
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      showToast('Thanks! Your request has been received.');
+      contactForm.reset();
+    });
+
+    // Reusable toast
+    function showToast(message = 'Demo action — connect this button to your full menu page.') {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4');
+      toast.classList.add('opacity-100');
+
+      setTimeout(() => {
+        toast.classList.add('opacity-0');
+        toast.classList.remove('opacity-100');
+      }, 2600);
+    }
+
+    // Dynamic footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
