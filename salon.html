@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxe & Glow Salon | Premium Hair, Beauty & Spa</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        salon: {
+                            50: '#fdf4f7',
+                            100: '#fbe8ef',
+                            200: '#f7d2e0',
+                            300: '#f0adca',
+                            400: '#e57ca8',
+                            500: '#d95288',
+                            600: '#c4376f',
+                            700: '#a52758',
+                            800: '#89234a',
+                            900: '#732141',
+                            gold: '#d4af37',
+                            dark: '#1c1317'
+                        }
+                    },
+                    fontFamily: {
+                        cormorant: ['"Cormorant Garamond"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(28, 19, 23, 0.65), rgba(28, 19, 23, 0.8)), url('https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 99%, #e4b47c 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+    </style>
+</head>
+<body class="bg-salon-50 font-sans text-salon-dark antialiased selection:bg-salon-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <span class="w-10 h-10 rounded-full bg-salon-500 text-white flex items-center justify-center text-xl font-bold shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-cormorant">L</i>
+                    </span>
+                    <span class="font-cormorant font-bold text-2xl sm:text-3xl tracking-wide text-salon-900">
+                        Luxe <span class="text-salon-500">&</span> Glow
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 font-medium text-sm uppercase tracking-wider">
+                    <a href="#about" class="text-salon-800 hover:text-salon-500 transition-colors">About</a>
+                    <a href="#highlights" class="text-salon-800 hover:text-salon-500 transition-colors">Highlights</a>
+                    <a href="#services" class="text-salon-800 hover:text-salon-500 transition-colors">Services</a>
+                    <a href="#gallery" class="text-salon-800 hover:text-salon-500 transition-colors">Gallery</a>
+                    <a href="#contact" class="text-salon-800 hover:text-salon-500 transition-colors">Contact</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="px-6 py-2.5 bg-salon-500 hover:bg-salon-600 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 text-sm uppercase tracking-wider">
+                        Book Appointment
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-salon-900 focus:outline-none p-2" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-salon-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-salon-800 font-medium hover:text-salon-500">About</a>
+            <a href="#highlights" class="block py-2 text-salon-800 font-medium hover:text-salon-500">Highlights</a>
+            <a href="#services" class="block py-2 text-salon-800 font-medium hover:text-salon-500">Services</a>
+            <a href="#gallery" class="block py-2 text-salon-800 font-medium hover:text-salon-500">Gallery</a>
+            <a href="#contact" class="block py-2 text-salon-800 font-medium hover:text-salon-500">Contact</a>
+            <a href="#contact" class="inline-block w-full text-center py-3 bg-salon-500 text-white font-semibold rounded-full shadow uppercase text-sm tracking-wider">
+                Book Appointment
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative pt-20 px-4">
+        <div class="max-w-4xl mx-auto text-center text-white z-10 py-20">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-salon-500/80 backdrop-blur-sm text-xs md:text-sm font-semibold tracking-widest uppercase mb-6 shadow-inner">
+                Unveil Your True Radiance
+            </span>
+            <h1 class="font-cormorant text-4xl sm:text-6xl md:text-7xl font-bold leading-tight mb-6 drop-shadow-md">
+                Elevate Your Beauty & Confidence
+            </h1>
+            <p class="text-lg sm:text-xl text-salon-100 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Experience luxury hair styling, precision cuts, luminous skincare, and bespoke spa treatments customized just for you by top-tier beauty artisans.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#services" class="w-full sm:w-auto px-8 py-4 bg-salon-500 hover:bg-salon-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1 text-sm uppercase tracking-wider">
+                    Explore Services
+                </a>
+                <a href="#contact" class="w-full sm:w-auto px-8 py-4 bg-white/20 hover:bg-white/30 text-white backdrop-blur-md font-bold rounded-full transition-all border border-white/40 text-sm uppercase tracking-wider">
+                    Book Now
+                </a>
+            </div>
+        </div>
+        <!-- Scroll Indicator -->
+        <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <!-- Highlights / Stats Bar -->
+    <section id="highlights" class="py-12 bg-salon-100/50 border-y border-salon-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <i class="fa-solid fa-scissors text-3xl text-salon-500 mb-3"></i>
+                    <h3 class="font-cormorant font-bold text-3xl text-salon-900">12+</h3>
+                    <p class="text-xs sm:text-sm text-salon-700 font-medium uppercase tracking-wider mt-1">Master Stylists</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-gem text-3xl text-salon-500 mb-3"></i>
+                    <h3 class="font-cormorant font-bold text-3xl text-salon-900">100%</h3>
+                    <p class="text-xs sm:text-sm text-salon-700 font-medium uppercase tracking-wider mt-1">Organic Products</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-spa text-3xl text-salon-500 mb-3"></i>
+                    <h3 class="font-cormorant font-bold text-3xl text-salon-900">10k+</h3>
+                    <p class="text-xs sm:text-sm text-salon-700 font-medium uppercase tracking-wider mt-1">Glow Transformations</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-star text-3xl text-salon-500 mb-3"></i>
+                    <h3 class="font-cormorant font-bold text-3xl text-salon-900">4.9/5</h3>
+                    <p class="text-xs sm:text-sm text-salon-700 font-medium uppercase tracking-wider mt-1">Client Satisfaction</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl transform lg:-rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1000&auto=format&fit=crop" alt="Stylist working on client hair" class="w-full h-[450px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-8 -right-4 sm:right-8 z-20 w-2/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Facial skincare treatment" class="w-full h-48 sm:h-56 object-cover">
+                    </div>
+                    <!-- Decorative Soft Blur -->
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-salon-200 rounded-full blur-2xl -z-0"></div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <span class="text-salon-500 font-bold uppercase tracking-widest text-xs sm:text-sm">The Luxe Experience</span>
+                    <h2 class="font-cormorant text-3xl sm:text-4xl md:text-5xl font-bold text-salon-900 leading-tight">
+                        Where Passion Meets High-End Elegance
+                    </h2>
+                    <p class="text-salon-800 leading-relaxed text-base sm:text-lg">
+                        At Luxe & Glow, we believe true beauty is about confidence, self-care, and personal expression. Our boutique sanctuary brings together award-winning hair artists, estheticians, and nail specialists dedicated to crafting tailored luxury experiences.
+                    </p>
+                    <p class="text-salon-700 leading-relaxed">
+                        We exclusive utilize cruelty-free, premium organic formulas and state-of-the-art beauty technology to ensure your skin, hair, and nails look stunning and stay healthy long after you leave our lounge.
+                    </p>
+
+                    <!-- Feature Bullets -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-salon-100 text-salon-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-salon-900 text-sm">Personalized Consultations</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-salon-100 text-salon-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-salon-900 text-sm">Organic & Cruelty-Free</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-salon-100 text-salon-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-salon-900 text-sm">Private VIP Treatment Suites</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-salon-100 text-salon-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-salon-900 text-sm">Complementary Champagne</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-salon-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-salon-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Bespoke Treatments</span>
+                <h2 class="font-cormorant text-3xl sm:text-4xl md:text-5xl font-bold text-salon-900 mt-2">Our Menu of Services</h2>
+                <p class="text-salon-700 mt-4 text-base sm:text-lg">Select from our signature hair, skin, nail, and spa therapies designed to refresh and revitalize.</p>
+            </div>
+
+            <!-- Services Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Service 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format&fit=crop" alt="Signature Haircut & Balayage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            From $160
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Precision Cut & Balayage</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Custom dimensional color painting coupled with a tailored haircut and signature blowout session.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 120 mins</span>
+                            <span>Top Rated</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Hydra-Glow Facial Therapy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $135
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Hydra-Glow Facial Therapy</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Deep pore cleansing, gentle exfoliation, and intense hyaluronic moisture infusion for luminous skin.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 60 mins</span>
+                            <span>Skincare Favorite</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=800&auto=format&fit=crop" alt="Luxury Gel Manicure" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $65
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Royal Gel Spa Manicure</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Cuticle care, hand exfoliation massage, and long-lasting non-toxic gel polish with custom nail art.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 45 mins</span>
+                            <span>Nail Care</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop" alt="Bridal & Event Makeup" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $150
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Bridal & Glam Makeup</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Full HD camera-ready makeup art, including custom mink lashes and skin prep session.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 75 mins</span>
+                            <span>Event Special</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" alt="Aromatherapy Spa Massage" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $120
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Aromatherapy Spa Massage</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Full body stress-release massage using warm essential oils tailored to calm mind and body.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 60 mins</span>
+                            <span>Relaxation</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1519699047748-de8e457a634e?q=80&w=800&auto=format&fit=crop" alt="Keratin Smooth Treatment" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-salon-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $210
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-cormorant font-bold text-2xl text-salon-900 group-hover:text-salon-500 transition-colors">Keratin Silk Hair Treatment</h3>
+                            <p class="text-salon-700 text-sm mt-2 leading-relaxed">
+                                Frizz-eliminating smoothing treatment for silk-like, ultra-shiny hair lasting up to 5 months.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-salon-100 flex items-center justify-between text-xs font-semibold text-salon-500">
+                            <span><i class="fa-solid fa-clock mr-1"></i> 150 mins</span>
+                            <span>Deep Care</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-salon-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Style Portfolio</span>
+                <h2 class="font-cormorant text-3xl sm:text-4xl md:text-5xl font-bold text-salon-900 mt-2">Lookbook & Salon Aesthetic</h2>
+                <p class="text-salon-700 mt-4 text-base sm:text-lg">Explore our recent transformations and peaceful luxury environment.</p>
+            </div>
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=800&auto=format&fit=crop" alt="Salon Interior" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Luxury Interior Lounge
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1562322140-8baeececf3df?q=80&w=800&auto=format&fit=crop" alt="Hair Styling" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Golden Balayage Finish
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?q=80&w=800&auto=format&fit=crop" alt="Facial Treatment" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Rejuvenating Skincare
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1604654894610-df63bc536371?q=80&w=800&auto=format&fit=crop" alt="Nail Art" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Bespoke Nail Art
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1487412720507-e7ab37603c6f?q=80&w=800&auto=format&fit=crop" alt="Makeup Look" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Bridal Glam Makeup
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1540555700478-4be289fbecef?q=80&w=800&auto=format&fit=crop" alt="Spa Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-xl font-cormorant font-semibold">
+                        Relaxing Spa Suite
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking / Contact & Footer Section -->
+    <footer id="contact" class="bg-salon-900 text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-salon-800">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <a href="#" class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-salon-500 text-white flex items-center justify-center text-xl font-bold font-cormorant">L</span>
+                        <span class="font-cormorant font-bold text-3xl tracking-wide text-white">
+                            Luxe <span class="text-salon-400">&</span> Glow
+                        </span>
+                    </a>
+                    <p class="text-salon-200 text-sm leading-relaxed max-w-md">
+                        Your premier boutique salon for high-fashion hair styling, skincare rituals, and full-body relaxation. Treat yourself to an extraordinary salon session.
+                    </p>
+                    <div class="space-y-3 pt-2 text-sm text-salon-200">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-salon-400 w-5"></i>
+                            <span>742 Evergreen Terrace, Suite 100, Beverly Hills, CA 90210</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-salon-400 w-5"></i>
+                            <span>(555) 987-6543</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-salon-400 w-5"></i>
+                            <span>appointments@luxeglowsalon.com</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-salon-400 w-5"></i>
+                            <span>Tue - Sat: 9:00 AM - 7:00 PM | Sun: 10:00 AM - 5:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Appointment Booking Form -->
+                <div class="lg:col-span-7 bg-salon-800/60 p-8 rounded-2xl border border-salon-700">
+                    <h3 class="font-cormorant font-bold text-3xl text-white mb-2">Book Your Session</h3>
+                    <p class="text-salon-200 text-sm mb-6">Select your preferred date and service, and we'll confirm your booking instantly.</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Thank you for booking with Luxe & Glow! We have received your request and will contact you shortly to confirm.');" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Full Name" required class="w-full px-4 py-3 bg-salon-900/80 border border-salon-700 rounded-lg text-white placeholder-salon-400 focus:outline-none focus:border-salon-400 text-sm">
+                            <input type="email" placeholder="Email Address" required class="w-full px-4 py-3 bg-salon-900/80 border border-salon-700 rounded-lg text-white placeholder-salon-400 focus:outline-none focus:border-salon-400 text-sm">
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="tel" placeholder="Phone Number" required class="w-full px-4 py-3 bg-salon-900/80 border border-salon-700 rounded-lg text-white placeholder-salon-400 focus:outline-none focus:border-salon-400 text-sm">
+                            <select required class="w-full px-4 py-3 bg-salon-900/80 border border-salon-700 rounded-lg text-salon-200 focus:outline-none focus:border-salon-400 text-sm">
+                                <option value="" disabled selected>Select Preferred Service</option>
+                                <option value="balayage">Precision Cut & Balayage</option>
+                                <option value="facial">Hydra-Glow Facial Therapy</option>
+                                <option value="manicure">Royal Gel Spa Manicure</option>
+                                <option value="makeup">Bridal & Glam Makeup</option>
+                                <option value="massage">Aromatherapy Spa Massage</option>
+                                <option value="keratin">Keratin Silk Hair Treatment</option>
+                            </select>
+                        </div>
+                        <textarea rows="3" placeholder="Special requests, notes, or ideal appointment date & time..." class="w-full px-4 py-3 bg-salon-900/80 border border-salon-700 rounded-lg text-white placeholder-salon-400 focus:outline-none focus:border-salon-400 text-sm"></textarea>
+                        <button type="submit" class="w-full py-3.5 bg-salon-500 hover:bg-salon-400 text-white font-bold rounded-lg transition-colors shadow-md text-sm uppercase tracking-wider">
+                            Request Appointment
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Copyright & Social -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-salon-300 gap-4">
+                <p>&copy; 2026 Luxe & Glow Salon. All rights reserved.</p>
+                <div class="flex space-x-6 text-lg">
+                    <a href="#" class="hover:text-salon-400 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-salon-400 transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-salon-400 transition-colors" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                    <a href="#" class="hover:text-salon-400 transition-colors" aria-label="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on nav link click
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
