@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AURA — contemporary fashion for the modern individual." />
+  <title>AURA — Contemporary Fashion</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ["DM Sans", "sans-serif"],
+            display: ["Playfair Display", "serif"]
+          },
+          colors: {
+            rose: "#e85d75",
+            blush: "#f8e7e9",
+            ink: "#171515",
+            cream: "#faf7f2"
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #faf7f2;
+    }
+
+    /* Hero gradient */
+    .hero-overlay {
+      background:
+        linear-gradient(
+          90deg,
+          rgba(15, 12, 12, 0.78) 0%,
+          rgba(15, 12, 12, 0.42) 50%,
+          rgba(15, 12, 12, 0.08) 100%
+        );
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition:
+        opacity 0.8s ease,
+        transform 0.8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Product hover */
+    .product-image {
+      transition:
+        transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1),
+        filter 0.4s ease;
+    }
+
+    .product-card:hover .product-image {
+      transform: scale(1.06);
+    }
+
+    /* Gallery hover */
+    .gallery-card img {
+      transition: transform 0.7s ease;
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    /* Navigation underline */
+    .nav-link::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 1.5px;
+      margin-top: 4px;
+      background: #e85d75;
+      transition: width 0.25s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    /* Marquee */
+    .marquee-track {
+      animation: marquee 22s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from {
+        transform: translateX(0);
+      }
+      to {
+        transform: translateX(-50%);
+      }
+    }
+
+    /* Floating hero detail */
+    .floating-card {
+      animation: floatCard 4s ease-in-out infinite;
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0);
+      }
+      50% {
+        transform: translateY(-10px);
+      }
+    }
+
+    /* Soft grain */
+    .grain {
+      background-image:
+        radial-gradient(rgba(255,255,255,.15) 0.7px, transparent 0.7px);
+      background-size: 7px 7px;
+      opacity: .08;
+      pointer-events: none;
+    }
+
+    ::selection {
+      background: #e85d75;
+      color: white;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-ink overflow-x-hidden">
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+  <header
+    id="header"
+    class="fixed top-0 left-0 w-full z-50 transition-all duration-300"
+  >
+    <nav class="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex items-center justify-between">
+
+      <!-- Brand -->
+      <a
+        href="#home"
+        class="font-display text-3xl sm:text-4xl font-bold tracking-tight text-white"
+      >
+        AURA<span class="text-rose">.</span>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex items-center gap-8 text-sm font-semibold text-white">
+
+        <a href="#about" class="nav-link">
+          About
+        </a>
+
+        <a href="#collection" class="nav-link">
+          Collection
+        </a>
+
+        <a href="#gallery" class="nav-link">
+          Journal
+        </a>
+
+        <a href="#contact" class="nav-link">
+          Contact
+        </a>
+
+        <a
+          href="#collection"
+          class="bg-white text-ink px-6 py-3 rounded-full hover:bg-rose hover:text-white transition"
+        >
+          Shop Collection
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="menuBtn"
+        class="md:hidden text-white text-2xl"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <div
+      id="mobileMenu"
+      class="hidden md:hidden mx-4 rounded-2xl bg-black/90 backdrop-blur-xl border border-white/10 px-6 py-6 text-white"
+    >
+      <div class="flex flex-col gap-5 font-semibold">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#collection" class="mobile-link">Collection</a>
+        <a href="#gallery" class="mobile-link">Journal</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="#collection" class="text-rose mobile-link">
+          Shop Collection →
+        </a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section
+    id="home"
+    class="relative min-h-screen flex items-center overflow-hidden"
+  >
+
+    <!-- Hero Image -->
+    <img
+      src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=2200&q=85"
+      alt="Fashion model wearing contemporary clothing"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+
+    <!-- Overlay -->
+    <div class="absolute inset-0 hero-overlay"></div>
+
+    <!-- Grain -->
+    <div class="absolute inset-0 grain"></div>
+
+    <!-- Hero Content -->
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 pb-20">
+
+      <div class="max-w-3xl">
+
+        <div
+          class="inline-flex items-center gap-2 rounded-full border border-white/30 bg-white/10 backdrop-blur px-4 py-2 text-white text-xs sm:text-sm uppercase tracking-[0.18em] font-semibold mb-7"
+        >
+          <span class="w-2 h-2 rounded-full bg-rose"></span>
+          New Season / 2026
+        </div>
+
+        <h1
+          class="font-display text-white text-6xl sm:text-7xl md:text-8xl lg:text-[8.5rem] leading-[0.88] font-bold tracking-tight"
+        >
+          Wear<br>
+          <span class="italic text-rose">Your</span><br>
+          Story.
+        </h1>
+
+        <p
+          class="text-white/75 text-lg sm:text-xl max-w-xl leading-relaxed mt-8"
+        >
+          Contemporary pieces designed for individuality, confidence and everyday expression. Discover a wardrobe that feels unmistakably yours.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-9">
+
+          <a
+            href="#collection"
+            class="bg-rose text-white px-8 py-4 rounded-full font-bold text-center hover:bg-white hover:text-ink hover:-translate-y-1 transition shadow-xl"
+          >
+            Explore Collection
+          </a>
+
+          <a
+            href="#about"
+            class="border border-white/40 bg-white/10 backdrop-blur text-white px-8 py-4 rounded-full font-bold text-center hover:bg-white hover:text-ink transition"
+          >
+            Discover AURA
+          </a>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="flex flex-wrap gap-10 mt-12 text-white">
+
+          <div>
+            <p class="font-display text-4xl font-bold">
+              24
+            </p>
+            <p class="text-white/50 text-sm">
+              New pieces
+            </p>
+          </div>
+
+          <div>
+            <p class="font-display text-4xl font-bold">
+              100%
+            </p>
+            <p class="text-white/50 text-sm">
+              Original design
+            </p>
+          </div>
+
+          <div>
+            <p class="font-display text-4xl font-bold">
+              4.9<span class="text-rose">★</span>
+            </p>
+            <p class="text-white/50 text-sm">
+              Customer rating
+            </p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Floating Label -->
+    <div
+      class="floating-card hidden lg:block absolute right-12 bottom-28 bg-white/95 backdrop-blur rounded-2xl p-5 shadow-2xl max-w-[220px]"
+    >
+      <p class="text-xs uppercase tracking-widest text-neutral-400 font-bold">
+        Featured Edit
+      </p>
+
+      <p class="font-display text-xl font-bold mt-2">
+        The Soft Structure Collection
+      </p>
+
+      <p class="text-sm text-neutral-500 mt-2">
+        Effortless silhouettes. Unexpected details.
+      </p>
+    </div>
+
+    <!-- Scroll -->
+    <a
+      href="#about"
+      class="absolute bottom-7 left-1/2 -translate-x-1/2 text-white/70 text-sm animate-bounce"
+    >
+      ↓ Scroll
+    </a>
+  </section>
+
+
+  <!-- =====================================================
+       MARQUEE
+  ====================================================== -->
+  <div class="overflow-hidden bg-ink text-white border-y border-white/10">
+    <div class="marquee-track py-4 font-display text-lg sm:text-xl uppercase tracking-[0.25em]">
+      AURA / NEW SEASON / DESIGNED TO BE YOURS / AURA / NEW SEASON / DESIGNED TO BE YOURS / AURA / NEW SEASON / DESIGNED TO BE YOURS /
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       ABOUT
+  ====================================================== -->
+  <section
+    id="about"
+    class="py-20 sm:py-28 bg-cream"
+  >
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <!-- Image -->
+        <div class="reveal relative">
+
+          <div class="rounded-[2rem] overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1490481651871-ab68de25d43d?auto=format&fit=crop&w=1200&q=85"
+              alt="Fashion editorial"
+              class="w-full h-[540px] object-cover"
+            />
+          </div>
+
+          <div
+            class="absolute -bottom-7 -right-2 sm:right-8 bg-ink text-white rounded-3xl p-6 sm:p-8 max-w-[240px] shadow-2xl"
+          >
+            <p class="font-display text-5xl font-bold">
+              08
+            </p>
+
+            <p class="font-bold mt-1">
+              Years of shaping modern wardrobes.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- Text -->
+        <div class="reveal">
+
+          <p class="text-rose uppercase tracking-[0.25em] text-sm font-bold mb-3">
+            Our Philosophy
+          </p>
+
+          <h2 class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold leading-[0.92]">
+            Fashion is<br>
+            <span class="italic text-rose">
+              personal.
+            </span>
+          </h2>
+
+          <p class="text-neutral-600 text-lg leading-relaxed mt-7">
+            AURA was created around a simple idea: clothing should feel like an extension of who you are. We create modern silhouettes with thoughtful materials, expressive details and timeless versatility.
+          </p>
+
+          <p class="text-neutral-500 leading-relaxed mt-5">
+            From everyday essentials to statement pieces, every collection is designed to move with you and stay relevant beyond a single season.
+          </p>
+
+
+          <!-- Highlights -->
+          <div class="grid sm:grid-cols-2 gap-5 mt-9">
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-2xl">✦</span>
+
+              <h3 class="font-bold text-lg mt-3">
+                Thoughtful Design
+              </h3>
+
+              <p class="text-sm text-neutral-500 mt-2">
+                Details designed to make simple pieces feel special.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-2xl">◌</span>
+
+              <h3 class="font-bold text-lg mt-3">
+                Conscious Choices
+              </h3>
+
+              <p class="text-sm text-neutral-500 mt-2">
+                Materials selected with longevity and quality in mind.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-2xl">↗</span>
+
+              <h3 class="font-bold text-lg mt-3">
+                Modern Fit
+              </h3>
+
+              <p class="text-sm text-neutral-500 mt-2">
+                Relaxed, refined silhouettes made for real life.
+              </p>
+            </div>
+
+            <div class="bg-white p-6 rounded-2xl shadow-sm hover:-translate-y-1 transition">
+              <span class="text-2xl">♡</span>
+
+              <h3 class="font-bold text-lg mt-3">
+                Made to Last
+              </h3>
+
+              <p class="text-sm text-neutral-500 mt-2">
+                Pieces intended to become wardrobe favourites.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       COLLECTION / PRODUCTS
+  ====================================================== -->
+  <section
+    id="collection"
+    class="py-20 sm:py-28 bg-white"
+  >
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-7 mb-12">
+
+        <div>
+          <p class="text-rose uppercase tracking-[0.25em] text-sm font-bold mb-3">
+            The Collection
+          </p>
+
+          <h2 class="font-display text-5xl sm:text-7xl font-bold leading-[0.9]">
+            New<br>
+            <span class="italic">Essentials.</span>
+          </h2>
+        </div>
+
+        <p class="text-neutral-500 max-w-md text-lg">
+          A curated selection of contemporary pieces created to mix, layer and make your own.
+        </p>
+
+      </div>
+
+
+      <!-- Product Grid -->
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+
+        <!-- Product 1 -->
+        <article class="product-card reveal group">
+
+          <div class="relative rounded-2xl overflow-hidden bg-blush h-[440px]">
+
+            <img
+              src="https://images.unsplash.com/photo-1485968579580-b6d095142e6e?auto=format&fit=crop&w=900&q=85"
+              alt="Minimal black fashion outfit"
+              class="product-image w-full h-full object-cover"
+            />
+
+            <span
+              class="absolute top-4 left-4 bg-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full"
+            >
+              New
+            </span>
+
+            <button
+              onclick="showToast('Added to your wishlist ♡')"
+              class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-rose hover:text-white transition"
+              aria-label="Add to wishlist"
+            >
+              ♡
+            </button>
+
+          </div>
+
+          <div class="flex justify-between gap-4 mt-4">
+            <div>
+              <h3 class="font-semibold">
+                Sculpted Blazer
+              </h3>
+              <p class="text-sm text-neutral-400 mt-1">
+                Onyx / Tailored
+              </p>
+            </div>
+
+            <span class="font-bold">
+              ₹5,490
+            </span>
+          </div>
+        </article>
+
+
+        <!-- Product 2 -->
+        <article class="product-card reveal group">
+
+          <div class="relative rounded-2xl overflow-hidden bg-blush h-[440px]">
+
+            <img
+              src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=85"
+              alt="Elegant fashion outfit"
+              class="product-image w-full h-full object-cover"
+            />
+
+            <span
+              class="absolute top-4 left-4 bg-rose text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full"
+            >
+              Bestseller
+            </span>
+
+            <button
+              onclick="showToast('Added to your wishlist ♡')"
+              class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-rose hover:text-white transition"
+              aria-label="Add to wishlist"
+            >
+              ♡
+            </button>
+
+          </div>
+
+          <div class="flex justify-between gap-4 mt-4">
+            <div>
+              <h3 class="font-semibold">
+                Fluid Midi Dress
+              </h3>
+              <p class="text-sm text-neutral-400 mt-1">
+                Rose / Draped
+              </p>
+            </div>
+
+            <span class="font-bold">
+              ₹4,290
+            </span>
+          </div>
+        </article>
+
+
+        <!-- Product 3 -->
+        <article class="product-card reveal group">
+
+          <div class="relative rounded-2xl overflow-hidden bg-blush h-[440px]">
+
+            <img
+              src="https://images.unsplash.com/photo-1506629905607-d9e1d7a3c4ef?auto=format&fit=crop&w=900&q=85"
+              alt="Contemporary fashion top"
+              class="product-image w-full h-full object-cover"
+            />
+
+            <button
+              onclick="showToast('Added to your wishlist ♡')"
+              class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-rose hover:text-white transition"
+              aria-label="Add to wishlist"
+            >
+              ♡
+            </button>
+
+          </div>
+
+          <div class="flex justify-between gap-4 mt-4">
+            <div>
+              <h3 class="font-semibold">
+                Essential Knit
+              </h3>
+              <p class="text-sm text-neutral-400 mt-1">
+                Ivory / Soft Touch
+              </p>
+            </div>
+
+            <span class="font-bold">
+              ₹2,890
+            </span>
+          </div>
+        </article>
+
+
+        <!-- Product 4 -->
+        <article class="product-card reveal group">
+
+          <div class="relative rounded-2xl overflow-hidden bg-blush h-[440px]">
+
+            <img
+              src="https://images.unsplash.com/photo-1525507119028-ed4c629a60a3?auto=format&fit=crop&w=900&q=85"
+              alt="Fashion store clothing"
+              class="product-image w-full h-full object-cover"
+            />
+
+            <span
+              class="absolute top-4 left-4 bg-ink text-white text-xs font-bold uppercase tracking-wider px-3 py-2 rounded-full"
+            >
+              Limited
+            </span>
+
+            <button
+              onclick="showToast('Added to your wishlist ♡')"
+              class="absolute top-4 right-4 w-10 h-10 bg-white/90 rounded-full flex items-center justify-center hover:bg-rose hover:text-white transition"
+              aria-label="Add to wishlist"
+            >
+              ♡
+            </button>
+
+          </div>
+
+          <div class="flex justify-between gap-4 mt-4">
+            <div>
+              <h3 class="font-semibold">
+                Everyday Trench
+              </h3>
+              <p class="text-sm text-neutral-400 mt-1">
+                Sand / Oversized
+              </p>
+            </div>
+
+            <span class="font-bold">
+              ₹6,190
+            </span>
+          </div>
+        </article>
+
+      </div>
+
+
+      <!-- CTA -->
+      <div class="reveal text-center mt-12">
+
+        <button
+          onclick="showToast('Demo store — connect this button to your shopping page.')"
+          class="border-2 border-ink px-8 py-4 rounded-full font-bold hover:bg-ink hover:text-white transition"
+        >
+          View Full Collection →
+        </button>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       GALLERY / JOURNAL
+  ====================================================== -->
+  <section
+    id="gallery"
+    class="py-20 sm:py-28 bg-ink text-white"
+  >
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="reveal text-center max-w-2xl mx-auto mb-12">
+
+        <p class="text-rose uppercase tracking-[0.25em] text-sm font-bold mb-3">
+          AURA Journal
+        </p>
+
+        <h2 class="font-display text-5xl sm:text-7xl font-bold">
+          Moments in
+          <span class="italic text-rose">
+            motion.
+          </span>
+        </h2>
+
+        <p class="text-white/50 mt-5 text-lg">
+          Inspiration, styling and stories from the world around AURA.
+        </p>
+
+      </div>
+
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+        <!-- Large Image -->
+        <div class="gallery-card reveal overflow-hidden rounded-3xl col-span-2 row-span-2 h-[500px] sm:h-[620px]">
+
+          <img
+            src="https://images.unsplash.com/photo-1529139574466-a303027c1d8b?auto=format&fit=crop&w=1200&q=85"
+            alt="Fashion editorial portrait"
+            class="w-full h-full object-cover"
+          />
+
+        </div>
+
+
+        <!-- Image -->
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[240px] sm:h-[300px]">
+
+          <img
+            src="https://images.unsplash.com/photo-1485230895905-ec40ba36b9bc?auto=format&fit=crop&w=900&q=85"
+            alt="Fashion model"
+            class="w-full h-full object-cover"
+          />
+
+        </div>
+
+
+        <!-- Image -->
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[240px] sm:h-[300px]">
+
+          <img
+            src="https://images.unsplash.com/photo-1496747611176-843222e1e57c?auto=format&fit=crop&w=900&q=85"
+            alt="Fashion look"
+            class="w-full h-full object-cover"
+          />
+
+        </div>
+
+
+        <!-- Text Card -->
+        <div class="reveal bg-rose rounded-3xl h-[240px] sm:h-[300px] p-7 flex flex-col justify-between">
+
+          <p class="uppercase tracking-widest text-xs font-bold">
+            Editorial / 06
+          </p>
+
+          <div>
+            <p class="font-display text-3xl font-bold">
+              "Style begins where rules end."
+            </p>
+
+            <p class="text-white/70 text-sm mt-3">
+              The art of making everyday dressing feel entirely your own.
+            </p>
+          </div>
+
+        </div>
+
+
+        <!-- Image -->
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[240px] sm:h-[300px]">
+
+          <img
+            src="https://images.unsplash.com/photo-1509631179647-0177331693ae?auto=format&fit=crop&w=900&q=85"
+            alt="Contemporary clothing"
+            class="w-full h-full object-cover"
+          />
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       CONTACT
+  ====================================================== -->
+  <section
+    id="contact"
+    class="py-20 sm:py-28 bg-blush text-ink"
+  >
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <!-- Contact Details -->
+        <div class="reveal">
+
+          <p class="text-rose uppercase tracking-[0.25em] text-sm font-bold mb-4">
+            Stay in the Loop
+          </p>
+
+          <h2 class="font-display text-5xl sm:text-7xl font-bold leading-[0.92]">
+            Dress<br>
+            <span class="italic text-rose">
+              differently.
+            </span>
+          </h2>
+
+          <p class="text-neutral-600 text-lg max-w-lg mt-7 leading-relaxed">
+            Sign up for early access to new collections, styling stories, private events and occasional AURA surprises.
+          </p>
+
+          <div class="mt-9 space-y-5">
+
+            <div>
+              <p class="font-bold">Studio</p>
+              <p class="text-neutral-500">
+                18 Design District, Your City, India
+              </p>
+            </div>
+
+            <div>
+              <p class="font-bold">Opening Hours</p>
+              <p class="text-neutral-500">
+                Mon–Sat / 10 AM – 8 PM
+              </p>
+            </div>
+
+            <div>
+              <p class="font-bold">Email</p>
+              <a
+                href="mailto:hello@aurafashion.com"
+                class="text-neutral-500 hover:text-rose transition"
+              >
+                hello@aurafashion.com
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Newsletter Form -->
+        <div class="reveal bg-white rounded-[2rem] p-7 sm:p-9 shadow-xl">
+
+          <p class="text-neutral-400 uppercase tracking-widest text-xs font-bold">
+            AURA Newsletter
+          </p>
+
+          <h3 class="font-display text-4xl font-bold mt-2">
+            Your inbox, but better.
+          </h3>
+
+          <form
+            id="contactForm"
+            class="mt-7 space-y-4"
+          >
+
+            <input
+              required
+              type="text"
+              placeholder="Your name"
+              class="w-full bg-neutral-100 px-5 py-4 rounded-xl outline-none focus:ring-2 focus:ring-rose"
+            />
+
+            <input
+              required
+              type="email"
+              placeholder="Email address"
+              class="w-full bg-neutral-100 px-5 py-4 rounded-xl outline-none focus:ring-2 focus:ring-rose"
+            />
+
+            <select
+              class="w-full bg-neutral-100 px-5 py-4 rounded-xl outline-none focus:ring-2 focus:ring-rose"
+            >
+              <option value="">What interests you?</option>
+              <option>Women's Collection</option>
+              <option>Men's Collection</option>
+              <option>Accessories</option>
+              <option>New Arrivals</option>
+              <option>Private Events</option>
+            </select>
+
+            <button
+              type="submit"
+              class="w-full bg-ink text-white py-4 rounded-xl font-bold hover:bg-rose transition"
+            >
+              Join AURA →
+            </button>
+
+            <p class="text-xs text-neutral-400 text-center">
+              No spam. Just good style.
+            </p>
+
+          </form>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="bg-ink text-white">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+
+      <div class="grid md:grid-cols-4 gap-10">
+
+        <!-- Brand -->
+        <div class="md:col-span-2">
+
+          <a
+            href="#home"
+            class="font-display text-4xl font-bold"
+          >
+            AURA<span class="text-rose">.</span>
+          </a>
+
+          <p class="text-white/40 max-w-md mt-4 leading-relaxed">
+            Contemporary fashion for people who dress with intention, curiosity and confidence.
+          </p>
+
+          <div class="flex gap-3 mt-6">
+
+            <a
+              href="#"
+              class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-rose transition"
+            >
+              IG
+            </a>
+
+            <a
+              href="#"
+              class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-rose transition"
+            >
+              FB
+            </a>
+
+            <a
+              href="#"
+              class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-rose transition"
+            >
+              PT
+            </a>
+
+          </div>
+        </div>
+
+
+        <!-- Explore -->
+        <div>
+
+          <h4 class="font-bold">
+            Explore
+          </h4>
+
+          <div class="flex flex-col gap-3 mt-5 text-white/45 text-sm">
+
+            <a href="#about" class="hover:text-rose transition">
+              About
+            </a>
+
+            <a href="#collection" class="hover:text-rose transition">
+              Collection
+            </a>
+
+            <a href="#gallery" class="hover:text-rose transition">
+              Journal
+            </a>
+
+            <a href="#contact" class="hover:text-rose transition">
+              Contact
+            </a>
+
+          </div>
+        </div>
+
+
+        <!-- Customer -->
+        <div>
+
+          <h4 class="font-bold">
+            Customer Care
+          </h4>
+
+          <div class="flex flex-col gap-3 mt-5 text-white/45 text-sm">
+
+            <a href="#" class="hover:text-rose transition">
+              Shipping & Returns
+            </a>
+
+            <a href="#" class="hover:text-rose transition">
+              Size Guide
+            </a>
+
+            <a href="#" class="hover:text-rose transition">
+              FAQs
+            </a>
+
+            <a href="#" class="hover:text-rose transition">
+              Privacy
+            </a>
+
+          </div>
+        </div>
+
+      </div>
+
+
+      <!-- Copyright -->
+      <div
+        class="border-t border-white/10 mt-10 pt-7 flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-white/30"
+      >
+        <p>
+          © <span id="year"></span> AURA Fashion. All rights reserved.
+        </p>
+
+        <p>
+          Designed for the modern wardrobe.
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- =====================================================
+       TOAST
+  ====================================================== -->
+  <div
+    id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-ink text-white px-6 py-3 rounded-full shadow-2xl opacity-0 pointer-events-none transition-all duration-300 z-[100] text-sm"
+  >
+    Demo action
+  </div>
+
+
+  <!-- =====================================================
+       JAVASCRIPT
+  ====================================================== -->
+  <script>
+
+    // -----------------------------------------------------
+    // Mobile navigation
+    // -----------------------------------------------------
+
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+
+      menuBtn.textContent =
+        mobileMenu.classList.contains("hidden")
+          ? "☰"
+          : "×";
+    });
+
+
+    // Close mobile menu after selecting a link
+    document.querySelectorAll(".mobile-link").forEach(link => {
+
+      link.addEventListener("click", () => {
+
+        mobileMenu.classList.add("hidden");
+
+        menuBtn.textContent = "☰";
+
+      });
+
+    });
+
+
+    // -----------------------------------------------------
+    // Sticky header
+    // -----------------------------------------------------
+
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 50) {
+
+        header.classList.add(
+          "bg-black/90",
+          "backdrop-blur-xl",
+          "shadow-xl"
+        );
+
+      } else {
+
+        header.classList.remove(
+          "bg-black/90",
+          "backdrop-blur-xl",
+          "shadow-xl"
+        );
+
+      }
+
+    });
+
+
+    // -----------------------------------------------------
+    // Scroll reveal animations
+    // -----------------------------------------------------
+
+    const revealElements =
+      document.querySelectorAll(".reveal");
+
+    const observer =
+      new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if (entry.isIntersecting) {
+
+              entry.target.classList.add("show");
+
+              observer.unobserve(entry.target);
+
+            }
+
+          });
+
+        },
+        {
+          threshold: 0.12
+        }
+      );
+
+    revealElements.forEach(element => {
+      observer.observe(element);
+    });
+
+
+    // -----------------------------------------------------
+    // Newsletter demo form
+    // -----------------------------------------------------
+
+    const contactForm =
+      document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", event => {
+
+      event.preventDefault();
+
+      showToast(
+        "Welcome to AURA — you're on the list ✦"
+      );
+
+      contactForm.reset();
+
+    });
+
+
+    // -----------------------------------------------------
+    // Toast notification
+    // -----------------------------------------------------
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      toast.textContent = message;
+
+      toast.classList.remove(
+        "opacity-0",
+        "translate-y-4"
+      );
+
+      toast.classList.add("opacity-100");
+
+      setTimeout(() => {
+
+        toast.classList.add("opacity-0");
+
+        toast.classList.remove("opacity-100");
+
+      }, 2600);
+
+    }
+
+
+    // -----------------------------------------------------
+    // Dynamic year
+    // -----------------------------------------------------
+
+    document.getElementById("year").textContent =
+      new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
