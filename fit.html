@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="FORGE Fitness Studio — Train stronger. Move better. Live stronger." />
+  <title>FORGE Fitness Studio</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['DM Sans', 'sans-serif'],
+            display: ['Oswald', 'sans-serif']
+          },
+          colors: {
+            lime: '#c7f000',
+            dark: '#101010',
+            charcoal: '#181818'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: #101010;
+    }
+
+    .hero-overlay {
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.92) 0%, rgba(0,0,0,.68) 48%, rgba(0,0,0,.25) 100%),
+        linear-gradient(0deg, rgba(0,0,0,.45), transparent 50%);
+    }
+
+    .grid-pattern {
+      background-image:
+        linear-gradient(rgba(199,240,0,.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(199,240,0,.055) 1px, transparent 1px);
+      background-size: 42px 42px;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(35px);
+      transition: opacity .8s ease, transform .8s ease;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card {
+      transition: transform .35s ease, box-shadow .35s ease;
+    }
+
+    .service-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 25px 60px rgba(0,0,0,.35);
+    }
+
+    .gallery-card img {
+      transition: transform .7s cubic-bezier(.2,.7,.2,1);
+    }
+
+    .gallery-card:hover img {
+      transform: scale(1.08);
+    }
+
+    .nav-link::after {
+      content: "";
+      display: block;
+      width: 0;
+      height: 2px;
+      margin-top: 3px;
+      background: #c7f000;
+      transition: width .25s ease;
+    }
+
+    .nav-link:hover::after {
+      width: 100%;
+    }
+
+    .outline-text {
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,.7);
+    }
+
+    .marquee {
+      animation: marquee 18s linear infinite;
+      white-space: nowrap;
+    }
+
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    @keyframes pulseRing {
+      0%, 100% { transform: scale(1); opacity: .5; }
+      50% { transform: scale(1.08); opacity: .9; }
+    }
+
+    .pulse-ring {
+      animation: pulseRing 2.8s ease-in-out infinite;
+    }
+
+    ::selection {
+      background: #c7f000;
+      color: #101010;
+    }
+  </style>
+</head>
+
+<body class="font-sans text-white overflow-x-hidden">
+
+  <!-- ================= NAVIGATION ================= -->
+  <header id="header" class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+    <nav class="max-w-7xl mx-auto px-5 sm:px-8 py-5 flex items-center justify-between">
+
+      <a href="#home" class="font-display font-bold text-3xl tracking-tight">
+        FORGE<span class="text-lime">.</span>
+      </a>
+
+      <div class="hidden md:flex items-center gap-8 text-sm font-bold">
+        <a href="#about" class="nav-link">About</a>
+        <a href="#programs" class="nav-link">Programs</a>
+        <a href="#gallery" class="nav-link">Studio</a>
+        <a href="#contact" class="nav-link">Contact</a>
+
+        <a
+          href="#contact"
+          class="bg-lime text-black px-6 py-3 rounded-full hover:bg-white transition"
+        >
+          Start Training
+        </a>
+      </div>
+
+      <button
+        id="menuBtn"
+        class="md:hidden text-2xl"
+        aria-label="Open navigation"
+      >
+        ☰
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="hidden md:hidden mx-4 bg-black/90 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-6">
+      <div class="flex flex-col gap-5 font-bold">
+        <a href="#about" class="mobile-link">About</a>
+        <a href="#programs" class="mobile-link">Programs</a>
+        <a href="#gallery" class="mobile-link">Studio</a>
+        <a href="#contact" class="mobile-link">Contact</a>
+        <a href="#contact" class="text-lime">Start Training →</a>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ================= HERO ================= -->
+  <section id="home" class="relative min-h-screen flex items-center overflow-hidden">
+
+    <img
+      src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=2200&q=85"
+      alt="Athlete training in a modern gym"
+      class="absolute inset-0 w-full h-full object-cover"
+    />
+
+    <div class="absolute inset-0 hero-overlay"></div>
+    <div class="absolute inset-0 grid-pattern"></div>
+
+    <div class="relative z-10 max-w-7xl mx-auto w-full px-5 sm:px-8 pt-28 pb-16">
+
+      <div class="max-w-4xl">
+
+        <div class="inline-flex items-center gap-3 border border-lime/30 bg-lime/10 text-lime rounded-full px-4 py-2 text-xs sm:text-sm font-bold uppercase tracking-wider mb-7">
+          <span class="w-2 h-2 bg-lime rounded-full animate-pulse"></span>
+          Premium Fitness Studio
+        </div>
+
+        <h1 class="font-display uppercase font-bold text-6xl sm:text-7xl md:text-8xl lg:text-[9rem] leading-[.84] tracking-tight">
+          Build<br>
+          <span class="text-lime">Your</span><br>
+          <span class="outline-text">Strongest</span>
+        </h1>
+
+        <p class="text-white/70 text-lg sm:text-xl max-w-xl leading-relaxed mt-8">
+          Strength. Conditioning. Community. A high-performance fitness studio built to help you become stronger, fitter and more confident.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4 mt-9">
+          <a
+            href="#contact"
+            class="bg-lime text-black px-8 py-4 rounded-full font-bold text-center hover:bg-white hover:-translate-y-1 transition shadow-xl"
+          >
+            Book Your Free Trial
+          </a>
+
+          <a
+            href="#programs"
+            class="border border-white/30 bg-white/5 backdrop-blur px-8 py-4 rounded-full font-bold text-center hover:bg-white hover:text-black transition"
+          >
+            Explore Programs
+          </a>
+        </div>
+
+        <div class="flex flex-wrap gap-10 mt-12">
+          <div>
+            <p class="font-display text-4xl font-bold">1,200+</p>
+            <p class="text-white/50 text-sm mt-1">Active Members</p>
+          </div>
+
+          <div>
+            <p class="font-display text-4xl font-bold">18</p>
+            <p class="text-white/50 text-sm mt-1">Expert Coaches</p>
+          </div>
+
+          <div>
+            <p class="font-display text-4xl font-bold">4.9<span class="text-lime">★</span></p>
+            <p class="text-white/50 text-sm mt-1">Member Rating</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="absolute bottom-0 left-0 w-full overflow-hidden border-y border-white/10 bg-black/40 backdrop-blur">
+      <div class="marquee py-4 text-lime font-display text-xl uppercase tracking-[.25em]">
+        TRAIN HARD • MOVE BETTER • GET STRONGER • BUILD CONFIDENCE • TRAIN HARD • MOVE BETTER • GET STRONGER • BUILD CONFIDENCE •
+      </div>
+    </div>
+
+  </section>
+
+
+  <!-- ================= ABOUT ================= -->
+  <section id="about" class="py-20 sm:py-28 bg-charcoal relative overflow-hidden">
+
+    <div class="absolute top-0 right-0 w-96 h-96 bg-lime/5 blur-3xl rounded-full"></div>
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <div class="reveal relative">
+
+          <div class="rounded-[2rem] overflow-hidden border border-white/10">
+            <img
+              src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1200&q=85"
+              alt="Person lifting weights"
+              class="w-full h-[540px] object-cover"
+            />
+          </div>
+
+          <div class="absolute -bottom-7 -right-2 sm:right-8 bg-lime text-black rounded-3xl p-6 sm:p-8 max-w-[230px] shadow-2xl">
+            <p class="font-display text-5xl font-bold">12</p>
+            <p class="font-bold mt-1">Years of pushing limits.</p>
+          </div>
+
+        </div>
+
+        <div class="reveal">
+
+          <p class="text-lime uppercase tracking-[.25em] text-sm font-bold mb-3">
+            More Than A Gym
+          </p>
+
+          <h2 class="font-display uppercase text-5xl sm:text-6xl lg:text-7xl font-bold leading-[.9]">
+            Train with<br>
+            <span class="text-lime">purpose.</span>
+          </h2>
+
+          <p class="text-white/60 text-lg leading-relaxed mt-7">
+            FORGE is a training community for people who want more from their fitness. Our coaches combine intelligent programming, expert guidance and an atmosphere that keeps you coming back.
+          </p>
+
+          <p class="text-white/60 leading-relaxed mt-5">
+            Whether you're stepping into a gym for the first time or chasing your next personal best, we meet you where you are and help you move forward.
+          </p>
+
+          <div class="grid sm:grid-cols-2 gap-5 mt-9">
+
+            <div class="border border-white/10 rounded-2xl p-5 hover:border-lime/50 transition">
+              <div class="text-lime text-2xl">01</div>
+              <h3 class="font-bold text-lg mt-3">Expert Coaching</h3>
+              <p class="text-white/45 text-sm mt-2">
+                Qualified coaches focused on your progress.
+              </p>
+            </div>
+
+            <div class="border border-white/10 rounded-2xl p-5 hover:border-lime/50 transition">
+              <div class="text-lime text-2xl">02</div>
+              <h3 class="font-bold text-lg mt-3">Smart Programming</h3>
+              <p class="text-white/45 text-sm mt-2">
+                Training designed around real results.
+              </p>
+            </div>
+
+            <div class="border border-white/10 rounded-2xl p-5 hover:border-lime/50 transition">
+              <div class="text-lime text-2xl">03</div>
+              <h3 class="font-bold text-lg mt-3">Real Community</h3>
+              <p class="text-white/45 text-sm mt-2">
+                Train alongside people who motivate you.
+              </p>
+            </div>
+
+            <div class="border border-white/10 rounded-2xl p-5 hover:border-lime/50 transition">
+              <div class="text-lime text-2xl">04</div>
+              <h3 class="font-bold text-lg mt-3">Flexible Plans</h3>
+              <p class="text-white/45 text-sm mt-2">
+                Memberships built for different lifestyles.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ================= PROGRAMS ================= -->
+  <section id="programs" class="py-20 sm:py-28 bg-white text-black">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="reveal flex flex-col md:flex-row md:items-end justify-between gap-7 mb-12">
+
+        <div>
+          <p class="text-neutral-500 uppercase tracking-[.25em] text-sm font-bold mb-3">
+            Training Programs
+          </p>
+
+          <h2 class="font-display uppercase text-5xl sm:text-7xl font-bold leading-[.9]">
+            Choose your<br>
+            <span class="text-lime bg-black px-2">challenge.</span>
+          </h2>
+        </div>
+
+        <p class="text-neutral-500 max-w-md text-lg">
+          From strength and conditioning to high-energy group sessions, find the training style that fits your goals.
+        </p>
+
+      </div>
+
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Program 1 -->
+        <article class="service-card reveal bg-neutral-100 rounded-[2rem] overflow-hidden">
+
+          <div class="relative h-64 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=1000&q=85"
+              alt="Strength training"
+              class="w-full h-full object-cover"
+            />
+
+            <span class="absolute top-5 left-5 bg-lime text-black px-3 py-1.5 rounded-full text-xs font-bold uppercase">
+              Popular
+            </span>
+          </div>
+
+          <div class="p-7">
+            <p class="text-neutral-400 font-bold text-sm">01 / STRENGTH</p>
+            <h3 class="font-display uppercase text-3xl font-bold mt-2">Forge Strength</h3>
+
+            <p class="text-neutral-500 mt-3">
+              Build functional strength, improve technique and develop confidence under the bar.
+            </p>
+
+            <div class="flex items-center justify-between mt-6 pt-5 border-t border-neutral-200">
+              <span class="font-bold">45–60 min</span>
+              <span class="font-bold">All Levels →</span>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- Program 2 -->
+        <article class="service-card reveal bg-neutral-100 rounded-[2rem] overflow-hidden">
+
+          <div class="relative h-64 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=1000&q=85"
+              alt="High intensity fitness class"
+              class="w-full h-full object-cover"
+            />
+
+            <span class="absolute top-5 left-5 bg-black text-white px-3 py-1.5 rounded-full text-xs font-bold uppercase">
+              High Energy
+            </span>
+          </div>
+
+          <div class="p-7">
+            <p class="text-neutral-400 font-bold text-sm">02 / CONDITIONING</p>
+            <h3 class="font-display uppercase text-3xl font-bold mt-2">HIIT Burn</h3>
+
+            <p class="text-neutral-500 mt-3">
+              Fast-paced intervals designed to build endurance, burn calories and challenge your limits.
+            </p>
+
+            <div class="flex items-center justify-between mt-6 pt-5 border-t border-neutral-200">
+              <span class="font-bold">40–50 min</span>
+              <span class="font-bold">Intermediate →</span>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- Program 3 -->
+        <article class="service-card reveal bg-neutral-100 rounded-[2rem] overflow-hidden">
+
+          <div class="relative h-64 overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1000&q=85"
+              alt="Personal training"
+              class="w-full h-full object-cover"
+            />
+
+            <span class="absolute top-5 left-5 bg-white text-black px-3 py-1.5 rounded-full text-xs font-bold uppercase">
+              1-on-1
+            </span>
+          </div>
+
+          <div class="p-7">
+            <p class="text-neutral-400 font-bold text-sm">03 / PERSONAL</p>
+            <h3 class="font-display uppercase text-3xl font-bold mt-2">Personal Training</h3>
+
+            <p class="text-neutral-500 mt-3">
+              One-on-one coaching with a personalized training plan built around your specific goals.
+            </p>
+
+            <div class="flex items-center justify-between mt-6 pt-5 border-t border-neutral-200">
+              <span class="font-bold">60 min</span>
+              <span class="font-bold">By Appointment →</span>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+
+      <!-- Membership strip -->
+      <div class="reveal mt-10 bg-black text-white rounded-[2rem] p-7 sm:p-9 flex flex-col lg:flex-row items-center justify-between gap-7">
+
+        <div>
+          <p class="text-lime uppercase tracking-widest text-xs font-bold">New Member Offer</p>
+          <h3 class="font-display uppercase text-3xl sm:text-4xl font-bold mt-2">
+            Your first week is on us.
+          </h3>
+          <p class="text-white/50 mt-2">
+            Try the studio, meet the coaches and discover your training style.
+          </p>
+        </div>
+
+        <a
+          href="#contact"
+          class="shrink-0 bg-lime text-black px-7 py-4 rounded-full font-bold hover:bg-white transition"
+        >
+          Claim Free Trial
+        </a>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= GALLERY ================= -->
+  <section id="gallery" class="py-20 sm:py-28 bg-charcoal">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8">
+
+      <div class="reveal text-center max-w-2xl mx-auto mb-12">
+
+        <p class="text-lime uppercase tracking-[.25em] text-sm font-bold mb-3">
+          The FORGE Experience
+        </p>
+
+        <h2 class="font-display uppercase text-5xl sm:text-7xl font-bold">
+          Sweat looks<br>
+          <span class="text-lime">good on you.</span>
+        </h2>
+
+        <p class="text-white/50 mt-5">
+          A purpose-built training environment designed to make every session count.
+        </p>
+
+      </div>
+
+
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+
+        <div class="gallery-card reveal overflow-hidden rounded-3xl col-span-2 h-[330px] sm:h-[420px]">
+          <img
+            src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=1400&q=85"
+            alt="Modern gym interior"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[330px] sm:h-[420px]">
+          <img
+            src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=900&q=85"
+            alt="Gym workout"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[330px] sm:h-[420px]">
+          <img
+            src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=900&q=85"
+            alt="Strength training"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="gallery-card reveal overflow-hidden rounded-3xl h-[330px] sm:h-[420px]">
+          <img
+            src="https://images.unsplash.com/photo-1517963879433-6ad2b056d712?auto=format&fit=crop&w=900&q=85"
+            alt="Fitness athlete"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+        <div class="gallery-card reveal overflow-hidden rounded-3xl col-span-2 h-[330px] sm:h-[420px]">
+          <img
+            src="https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=1400&q=85"
+            alt="Group fitness training"
+            class="w-full h-full object-cover"
+          />
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" class="relative py-20 sm:py-28 bg-lime text-black overflow-hidden">
+
+    <div class="absolute -right-24 -top-24 w-80 h-80 border-[70px] border-black/10 rounded-full pulse-ring"></div>
+    <div class="absolute -left-24 -bottom-32 w-96 h-96 border-[80px] border-black/5 rounded-full"></div>
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 relative z-10">
+
+      <div class="grid lg:grid-cols-2 gap-14 lg:gap-24 items-center">
+
+        <div class="reveal">
+
+          <p class="uppercase tracking-[.25em] text-sm font-bold mb-4">
+            Ready to begin?
+          </p>
+
+          <h2 class="font-display uppercase text-6xl sm:text-7xl lg:text-8xl font-bold leading-[.88]">
+            Stop<br>
+            waiting.<br>
+            <span class="outline-text" style="-webkit-text-stroke-color:#101010;">
+              Start.
+            </span>
+          </h2>
+
+          <p class="text-black/60 text-lg max-w-lg mt-7">
+            Book your free trial session and see why hundreds of members call FORGE their second home.
+          </p>
+
+          <div class="mt-8 space-y-4">
+
+            <div class="flex gap-4 items-start">
+              <span class="font-bold">📍</span>
+              <div>
+                <p class="font-bold">Visit Us</p>
+                <p class="text-black/60">24 Fitness Avenue, Your City, India</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <span class="font-bold">⏰</span>
+              <div>
+                <p class="font-bold">Opening Hours</p>
+                <p class="text-black/60">Mon–Fri: 5:30 AM – 10 PM<br>Sat–Sun: 7 AM – 8 PM</p>
+              </div>
+            </div>
+
+            <div class="flex gap-4 items-start">
+              <span class="font-bold">☎</span>
+              <div>
+                <p class="font-bold">Call Us</p>
+                <a href="tel:+919876543210" class="text-black/60 hover:underline">
+                  +91 98765 43210
+                </a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Contact Form -->
+        <div class="reveal bg-black text-white rounded-[2rem] p-7 sm:p-9 shadow-2xl">
+
+          <p class="text-lime uppercase tracking-widest text-xs font-bold">
+            Free Trial
+          </p>
+
+          <h3 class="font-display uppercase text-4xl font-bold mt-2">
+            Let's get you moving.
+          </h3>
+
+          <form id="contactForm" class="mt-7 space-y-4">
+
+            <input
+              required
+              type="text"
+              placeholder="Full name"
+              class="w-full bg-white/10 border border-white/10 px-5 py-4 rounded-xl outline-none focus:border-lime transition"
+            />
+
+            <input
+              required
+              type="email"
+              placeholder="Email address"
+              class="w-full bg-white/10 border border-white/10 px-5 py-4 rounded-xl outline-none focus:border-lime transition"
+            />
+
+            <input
+              required
+              type="tel"
+              placeholder="Phone number"
+              class="w-full bg-white/10 border border-white/10 px-5 py-4 rounded-xl outline-none focus:border-lime transition"
+            />
+
+            <select
+              class="w-full bg-white/10 border border-white/10 px-5 py-4 rounded-xl outline-none focus:border-lime transition text-white"
+            >
+              <option value="" class="text-black">What are you interested in?</option>
+              <option class="text-black">Strength Training</option>
+              <option class="text-black">HIIT / Conditioning</option>
+              <option class="text-black">Personal Training</option>
+              <option class="text-black">General Membership</option>
+            </select>
+
+            <textarea
+              rows="4"
+              placeholder="Tell us about your fitness goals..."
+              class="w-full bg-white/10 border border-white/10 px-5 py-4 rounded-xl outline-none focus:border-lime transition resize-none"
+            ></textarea>
+
+            <button
+              type="submit"
+              class="w-full bg-lime text-black py-4 rounded-xl font-bold hover:bg-white transition"
+            >
+              Book My Free Trial →
+            </button>
+
+          </form>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ================= FOOTER ================= -->
+  <footer class="bg-black text-white border-t border-white/10">
+
+    <div class="max-w-7xl mx-auto px-5 sm:px-8 py-12">
+
+      <div class="grid md:grid-cols-4 gap-10">
+
+        <div class="md:col-span-2">
+
+          <a href="#home" class="font-display text-4xl font-bold">
+            FORGE<span class="text-lime">.</span>
+          </a>
+
+          <p class="text-white/40 max-w-md mt-4 leading-relaxed">
+            A modern fitness studio built around intelligent training, expert coaching and a community that keeps you moving.
+          </p>
+
+          <div class="flex gap-3 mt-6">
+            <a href="#" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-lime hover:text-black transition">IG</a>
+            <a href="#" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-lime hover:text-black transition">FB</a>
+            <a href="#" class="w-10 h-10 border border-white/10 rounded-full flex items-center justify-center hover:bg-lime hover:text-black transition">YT</a>
+          </div>
+
+        </div>
+
+        <div>
+          <h4 class="font-bold">Explore</h4>
+
+          <div class="flex flex-col gap-3 mt-5 text-white/45 text-sm">
+            <a href="#about" class="hover:text-lime transition">About</a>
+            <a href="#programs" class="hover:text-lime transition">Programs</a>
+            <a href="#gallery" class="hover:text-lime transition">Studio</a>
+            <a href="#contact" class="hover:text-lime transition">Contact</a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="font-bold">Contact</h4>
+
+          <div class="flex flex-col gap-3 mt-5 text-white/45 text-sm">
+            <p>24 Fitness Avenue</p>
+            <p>Your City, India</p>
+            <a href="mailto:hello@forgefitness.com" class="hover:text-lime transition">
+              hello@forgefitness.com
+            </a>
+            <a href="tel:+919876543210" class="hover:text-lime transition">
+              +91 98765 43210
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="border-t border-white/10 mt-10 pt-7 flex flex-col sm:flex-row gap-4 items-center justify-between text-xs text-white/30">
+        <p>© <span id="year"></span> FORGE Fitness Studio. All rights reserved.</p>
+        <p>Train hard. Recover well. Live strong.</p>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ================= JAVASCRIPT ================= -->
+  <script>
+
+    // Mobile navigation
+    const menuBtn = document.getElementById("menuBtn");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileLinks = document.querySelectorAll(".mobile-link");
+
+    menuBtn.addEventListener("click", () => {
+      mobileMenu.classList.toggle("hidden");
+      menuBtn.textContent = mobileMenu.classList.contains("hidden") ? "☰" : "×";
+    });
+
+    mobileLinks.forEach(link => {
+      link.addEventListener("click", () => {
+        mobileMenu.classList.add("hidden");
+        menuBtn.textContent = "☰";
+      });
+    });
+
+
+    // Header background on scroll
+    const header = document.getElementById("header");
+
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 50) {
+        header.classList.add(
+          "bg-black/90",
+          "backdrop-blur-xl",
+          "shadow-xl"
+        );
+      } else {
+        header.classList.remove(
+          "bg-black/90",
+          "backdrop-blur-xl",
+          "shadow-xl"
+        );
+      }
+    });
+
+
+    // Scroll reveal animations
+    const revealElements = document.querySelectorAll(".reveal");
+
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("show");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+    revealElements.forEach(element => observer.observe(element));
+
+
+    // Demo contact form
+    const contactForm = document.getElementById("contactForm");
+
+    contactForm.addEventListener("submit", event => {
+      event.preventDefault();
+
+      const button = contactForm.querySelector("button");
+
+      button.textContent = "Request Received ✓";
+      button.classList.remove("bg-lime");
+      button.classList.add("bg-white");
+
+      setTimeout(() => {
+        button.textContent = "Book My Free Trial →";
+        button.classList.remove("bg-white");
+        button.classList.add("bg-lime");
+        contactForm.reset();
+      }, 2500);
+    });
+
+
+    // Dynamic copyright year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+  </script>
+
+</body>
+</html>
