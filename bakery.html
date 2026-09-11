@@ -1,0 +1,509 @@
+html_content = """<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Delights Bakery | Artisanal Pastries & Bakes</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        bakery: {
+                            50: '#fffbf5',
+                            100: '#fef3e2',
+                            200: '#fce4c4',
+                            300: '#f9cb97',
+                            400: '#f4a862',
+                            500: '#ee8535',
+                            600: '#df6827',
+                            700: '#b94e20',
+                            800: '#943f21',
+                            900: '#77361f',
+                            rose: '#d9777f',
+                            cream: '#fdfbf7',
+                            dark: '#2c1810'
+                        }
+                    },
+                    fontFamily: {
+                        playfair: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .hero-bg {
+            background-image: linear-gradient(rgba(44, 24, 16, 0.55), rgba(44, 24, 16, 0.75)), url('https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=1920&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-bakery-50 font-sans text-bakery-dark antialiased selection:bg-bakery-500 selection:text-white">
+
+    <!-- Navigation Header -->
+    <nav id="navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-white/80 backdrop-blur-md shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <span class="w-10 h-10 rounded-full bg-bakery-500 text-white flex items-center justify-center text-xl font-bold shadow-md group-hover:scale-105 transition-transform">
+                        <i class="fa-solid font-playfair">S</i>
+                    </span>
+                    <span class="font-playfair font-bold text-2xl tracking-tight text-bakery-900">
+                        Sweet <span class="text-bakery-500">Delights</span>
+                    </span>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <div class="hidden md:flex items-center space-x-8 font-medium">
+                    <a href="#about" class="text-bakery-800 hover:text-bakery-500 transition-colors">About</a>
+                    <a href="#highlights" class="text-bakery-800 hover:text-bakery-500 transition-colors">Highlights</a>
+                    <a href="#menu" class="text-bakery-800 hover:text-bakery-500 transition-colors">Menu & Specialties</a>
+                    <a href="#gallery" class="text-bakery-800 hover:text-bakery-500 transition-colors">Gallery</a>
+                    <a href="#contact" class="text-bakery-800 hover:text-bakery-500 transition-colors">Contact</a>
+                </div>
+
+                <!-- Action Button -->
+                <div class="hidden md:block">
+                    <a href="#contact" class="px-6 py-2.5 bg-bakery-500 hover:bg-bakery-600 text-white font-semibold rounded-full shadow-md hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5">
+                        Order Online
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="md:hidden text-bakery-900 focus:outline-none p-2" aria-label="Toggle Navigation">
+                    <i class="fa-solid fa-bars text-2xl"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Drawer -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-bakery-100 px-4 pt-2 pb-6 space-y-3">
+            <a href="#about" class="block py-2 text-bakery-800 font-medium hover:text-bakery-500">About</a>
+            <a href="#highlights" class="block py-2 text-bakery-800 font-medium hover:text-bakery-500">Highlights</a>
+            <a href="#menu" class="block py-2 text-bakery-800 font-medium hover:text-bakery-500">Menu & Specialties</a>
+            <a href="#gallery" class="block py-2 text-bakery-800 font-medium hover:text-bakery-500">Gallery</a>
+            <a href="#contact" class="block py-2 text-bakery-800 font-medium hover:text-bakery-500">Contact</a>
+            <a href="#contact" class="inline-block w-full text-center py-3 bg-bakery-500 text-white font-semibold rounded-full shadow">
+                Order Online
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-bg min-h-screen flex items-center justify-center relative pt-20 px-4">
+        <div class="max-w-4xl mx-auto text-center text-white z-10 py-20">
+            <span class="inline-block px-4 py-1.5 rounded-full bg-bakery-500/80 backdrop-blur-sm text-xs md:text-sm font-semibold tracking-wider uppercase mb-6 shadow-inner">
+                Freshly Baked Every Single Morning
+            </span>
+            <h1 class="font-playfair text-4xl sm:text-6xl md:text-7xl font-extrabold leading-tight mb-6 drop-shadow-md">
+                Handcrafted Bakes Made With Pure Passion
+            </h1>
+            <p class="text-lg sm:text-xl text-bakery-100 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
+                Indulge in artisanal sourdough, delicate French pastries, and custom celebration cakes crafted using centuries-old techniques and organic local ingredients.
+            </p>
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#menu" class="w-full sm:w-auto px-8 py-4 bg-bakery-500 hover:bg-bakery-600 text-white font-bold rounded-full shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    Explore Our Menu
+                </a>
+                <a href="#about" class="w-full sm:w-auto px-8 py-4 bg-white/20 hover:bg-white/30 text-white backdrop-blur-md font-bold rounded-full transition-all border border-white/40">
+                    Our Craft Story
+                </a>
+            </div>
+        </div>
+        <!-- Decorative Scroll Indicator -->
+        <a href="#about" class="absolute bottom-8 left-1/2 -translate-x-1/2 text-white/70 hover:text-white transition-colors animate-bounce">
+            <i class="fa-solid fa-chevron-down text-2xl"></i>
+        </a>
+    </section>
+
+    <!-- Highlights & Quick Stats -->
+    <section id="highlights" class="py-12 bg-bakery-100/50 border-y border-bakery-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+                <div class="p-4">
+                    <i class="fa-solid fa-wheat-awn text-3xl text-bakery-500 mb-3"></i>
+                    <h3 class="font-playfair font-bold text-3xl text-bakery-900">100%</h3>
+                    <p class="text-sm text-bakery-700 font-medium mt-1">Organic Flour</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-clock text-3xl text-bakery-500 mb-3"></i>
+                    <h3 class="font-playfair font-bold text-3xl text-bakery-900">24-Hr</h3>
+                    <p class="text-sm text-bakery-700 font-medium mt-1">Slow Fermentation</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-award text-3xl text-bakery-500 mb-3"></i>
+                    <h3 class="font-playfair font-bold text-3xl text-bakery-900">15+</h3>
+                    <p class="text-sm text-bakery-700 font-medium mt-1">Years of Excellence</p>
+                </div>
+                <div class="p-4">
+                    <i class="fa-solid fa-heart text-3xl text-bakery-500 mb-3"></i>
+                    <h3 class="font-playfair font-bold text-3xl text-bakery-900">50k+</h3>
+                    <p class="text-sm text-bakery-700 font-medium mt-1">Happy Pastry Lovers</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 bg-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Image Grid -->
+                <div class="relative">
+                    <div class="relative z-10 rounded-2xl overflow-hidden shadow-2xl transform lg:-rotate-2 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=1000&auto=format&fit=crop" alt="Baker shaping fresh bread" class="w-full h-[450px] object-cover">
+                    </div>
+                    <div class="absolute -bottom-8 -right-4 sm:right-8 z-20 w-2/3 rounded-2xl overflow-hidden shadow-2xl border-4 border-white transform lg:rotate-3 hover:rotate-0 transition-transform duration-500">
+                        <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=800&auto=format&fit=crop" alt="Fresh croissants" class="w-full h-48 sm:h-56 object-cover">
+                    </div>
+                    <!-- Decorative Element -->
+                    <div class="absolute -top-6 -left-6 w-32 h-32 bg-bakery-200 rounded-full blur-2xl -z-0"></div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="space-y-6">
+                    <span class="text-bakery-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Our Heritage & Craft</span>
+                    <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-bakery-900 leading-tight">
+                        Baking Joy Into Every Single Bite
+                    </h2>
+                    <p class="text-bakery-800 leading-relaxed text-base sm:text-lg">
+                        Founded in 2011, Sweet Delights started as a modest neighborhood oven with a simple mission: to preserve the art of traditional European baking. Every loaf, pastry, and cake is handcrafted daily by master bakers using heritage sourdough cultures and farm-fresh butter.
+                    </p>
+                    <p class="text-bakery-700 leading-relaxed">
+                        We prioritize local organic grains, high-fat French-style butter, and zero artificial preservatives. From our golden, flaky croissants to our rich celebration cakes, we ensure an unforgettable taste experience.
+                    </p>
+
+                    <!-- Feature Bullets -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-4">
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-bakery-100 text-bakery-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-bakery-900 text-sm">100% Scratch-Made Daily</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-bakery-100 text-bakery-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-bakery-900 text-sm">Custom Cake Designs</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-bakery-100 text-bakery-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-bakery-900 text-sm">Gluten-Free & Vegan Options</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <span class="w-8 h-8 rounded-full bg-bakery-100 text-bakery-600 flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-check text-sm"></i>
+                            </span>
+                            <span class="font-semibold text-bakery-900 text-sm">Ethically Sourced Espresso</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu & Specialties Section -->
+    <section id="menu" class="py-24 bg-bakery-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-bakery-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Fresh From The Oven</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-bakery-900 mt-2">Our Signature Favorites</h2>
+                <p class="text-bakery-700 mt-4 text-base sm:text-lg">Discover our curated selection of daily baked goods, made with love and premium ingredients.</p>
+            </div>
+
+            <!-- Menu Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Item 1 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1555507036-ab1f4038808a?q=80&w=800&auto=format&fit=crop" alt="Artisanal Sourdough" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $7.50
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Rustic Country Sourdough</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Naturally leavened over 36 hours with an airy crumb and a crisp, caramelized crust.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-leaf mr-1"></i> Vegan Friendly</span>
+                            <span>Fresh Daily</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 2 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop" alt="French Butter Croissant" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $4.25
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Classic Butter Croissant</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Golden-brown French pastry with 84% butter fat lamination for maximum flakiness.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-star mr-1"></i> Bestseller</span>
+                            <span>Fresh Daily</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 3 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?q=80&w=800&auto=format&fit=crop" alt="Berry Layer Cake" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $38.00
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Wild Berry Vanilla Cake</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Soft sponge cake layered with Madagascar vanilla bean cream and fresh seasonal berries.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-cake-candles mr-1"></i> Custom Orders</span>
+                            <span>6 Inch</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 4 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" alt="Fruit Tart" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $6.50
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Fruit Custard Tart</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Crisp shortcrust shell filled with velvety pastry cream and topped with glazed fresh fruits.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-heart mr-1"></i> Chef's Pick</span>
+                            <span>Single Serve</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 5 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" alt="Chocolate Cookies" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $3.50
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Sea Salt Dark Choc Cookie</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Chewy center, crisp edges, loaded with 70% dark Belgian chocolate chunks & flaky sea salt.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-cookie mr-1"></i> Warm Baked</span>
+                            <span>Per Piece</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Item 6 -->
+                <div class="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 group flex flex-col">
+                    <div class="relative overflow-hidden h-64">
+                        <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" alt="Espresso Coffee" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <span class="absolute top-4 right-4 bg-bakery-500 text-white font-bold px-3 py-1 rounded-full text-sm shadow">
+                            $4.75
+                        </span>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between">
+                        <div>
+                            <h3 class="font-playfair font-bold text-xl text-bakery-900 group-hover:text-bakery-500 transition-colors">Artisan Oat Latte</h3>
+                            <p class="text-bakery-700 text-sm mt-2 leading-relaxed">
+                                Single-origin espresso paired with creamy steamed oat milk and a hint of vanilla bean.
+                            </p>
+                        </div>
+                        <div class="mt-6 pt-4 border-t border-bakery-100 flex items-center justify-between text-xs font-semibold text-bakery-500">
+                            <span><i class="fa-solid fa-mug-hot mr-1"></i> Hot / Iced</span>
+                            <span>12 oz</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-bakery-500 font-bold uppercase tracking-widest text-xs sm:text-sm">Visual Delights</span>
+                <h2 class="font-playfair text-3xl sm:text-4xl md:text-5xl font-bold text-bakery-900 mt-2">Inside Our Bakery</h2>
+                <p class="text-bakery-700 mt-4 text-base sm:text-lg">A glimpse into our kitchen, daily freshness, and cozy atmosphere.</p>
+            </div>
+
+            <!-- Image Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?q=80&w=800&auto=format&fit=crop" alt="Croissants gallery" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Golden Flaky Layers
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1517433670267-08bbd4be890f?q=80&w=800&auto=format&fit=crop" alt="Bread prep" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Daily Dough Kneading
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1535141192574-5d4897c13136?q=80&w=800&auto=format&fit=crop" alt="Cakes" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Celebration Cakes
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?q=80&w=800&auto=format&fit=crop" alt="Cookies" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Fresh Baked Cookies
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1563729784474-d77dbb933a9e?q=80&w=800&auto=format&fit=crop" alt="Pastries" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Fruit Tarts & Sweets
+                    </div>
+                </div>
+                <div class="overflow-hidden rounded-xl h-64 group relative shadow-md">
+                    <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?q=80&w=800&auto=format&fit=crop" alt="Coffee cup" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
+                    <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center text-white text-lg font-playfair font-semibold">
+                        Specialty Coffee
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact & Footer Section -->
+    <footer id="contact" class="bg-bakery-900 text-white pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 pb-16 border-b border-bakery-800">
+                <!-- Info Column -->
+                <div class="lg:col-span-5 space-y-6">
+                    <a href="#" class="flex items-center gap-3">
+                        <span class="w-10 h-10 rounded-full bg-bakery-500 text-white flex items-center justify-center text-xl font-bold font-playfair">S</span>
+                        <span class="font-playfair font-bold text-2xl tracking-tight text-white">
+                            Sweet <span class="text-bakery-400">Delights</span>
+                        </span>
+                    </a>
+                    <p class="text-bakery-200 text-sm leading-relaxed max-w-md">
+                        Bringing warm, fresh, handcrafted baked goods to our community every single day. Stop by for your morning espresso or order a custom cake for your next celebration.
+                    </p>
+                    <div class="space-y-3 pt-2 text-sm text-bakery-200">
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-location-dot text-bakery-400 w-5"></i>
+                            <span>123 Baker Street, Sweetville, NY 10001</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-phone text-bakery-400 w-5"></i>
+                            <span>(555) 234-5678</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-envelope text-bakery-400 w-5"></i>
+                            <span>hello@sweetdelightsbakery.com</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i class="fa-solid fa-clock text-bakery-400 w-5"></i>
+                            <span>Mon - Sun: 7:00 AM - 6:00 PM</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Form / Order Inquiry -->
+                <div class="lg:col-span-7 bg-bakery-800/60 p-8 rounded-2xl border border-bakery-700">
+                    <h3 class="font-playfair font-bold text-2xl text-white mb-2">Send an Order Inquiry</h3>
+                    <p class="text-bakery-200 text-sm mb-6">Planning a custom order or catering event? Reach out to us!</p>
+                    
+                    <form onsubmit="event.preventDefault(); alert('Thank you for your message! We will get back to you shortly.');" class="space-y-4">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <input type="text" placeholder="Your Name" required class="w-full px-4 py-3 bg-bakery-900/80 border border-bakery-700 rounded-lg text-white placeholder-bakery-400 focus:outline-none focus:border-bakery-400 text-sm">
+                            <input type="email" placeholder="Your Email" required class="w-full px-4 py-3 bg-bakery-900/80 border border-bakery-700 rounded-lg text-white placeholder-bakery-400 focus:outline-none focus:border-bakery-400 text-sm">
+                        </div>
+                        <input type="text" placeholder="Inquiry Type (e.g. Wedding Cake, Catering)" class="w-full px-4 py-3 bg-bakery-900/80 border border-bakery-700 rounded-lg text-white placeholder-bakery-400 focus:outline-none focus:border-bakery-400 text-sm">
+                        <textarea rows="3" placeholder="Tell us about your event date, servings, and ideas..." required class="w-full px-4 py-3 bg-bakery-900/80 border border-bakery-700 rounded-lg text-white placeholder-bakery-400 focus:outline-none focus:border-bakery-400 text-sm"></textarea>
+                        <button type="submit" class="w-full py-3.5 bg-bakery-500 hover:bg-bakery-400 text-white font-bold rounded-lg transition-colors shadow-md text-sm uppercase tracking-wider">
+                            Submit Request
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Bottom Copyright & Social -->
+            <div class="pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-bakery-300 gap-4">
+                <p>&copy; 2026 Sweet Delights Bakery. All rights reserved.</p>
+                <div class="flex space-x-6 text-lg">
+                    <a href="#" class="hover:text-bakery-400 transition-colors" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" class="hover:text-bakery-400 transition-colors" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>
+                    <a href="#" class="hover:text-bakery-400 transition-colors" aria-label="Pinterest"><i class="fa-brands fa-pinterest"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Mobile Menu Toggle Script -->
+    <script>
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu on click link
+        document.querySelectorAll('#mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+            });
+        });
+    </script>
+</body>
+</html>
+"""
+
+with open("index.html", "w", encoding="utf-8") as f:
+    f.write(html_content)
